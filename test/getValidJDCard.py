@@ -97,8 +97,8 @@ def get16RandomNum():
     #使用表理解(list comprehension)一次性生成多个随机数,range函数输入不同的值，可以设置需要生成随机数的个数
     return [random.randint(0,35) for _ in range(16)]
 if __name__=='__main__':
-#     init()
-    for i in range(1000):
+    init()
+    for i in range(10):
         getNewVerifyCode(verifyCodeUrl)
         
 #     getNewRandPwd()

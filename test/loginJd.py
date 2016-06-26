@@ -71,12 +71,12 @@ def packagePostData():
     }
     return postData
 if __name__=='__main__':
-#     processCookie()
-#     passportRes = Navigate(loginPostUrl,packagePostData())
-#     print(passportRes)
-    req = urllib.request.Request(loginPageUrl)
-    req1 = urllib.request.urlopen(req).read()
-    print(req)
+    processCookie()
+    passportRes = Navigate(loginPostUrl,packagePostData())
+    print(passportRes)
+#     req = urllib.request.Request(loginPageUrl)
+#     req1 = urllib.request.urlopen(req).read()
+#     print(req1)
      
       
     

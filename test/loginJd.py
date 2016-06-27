@@ -79,7 +79,6 @@ if __name__=='__main__':
     processCookie()
     passportRes = Navigate(loginPostUrl,packagePostData())
     print('login response: %s' % passportRes)
-    #\\u8bf7\\u5237\\u65b0\\u9875\\u9762\\u540e\\u91cd\\u65b0\\u63d0\\u4ea4   请刷新页面后重新提交
      
       
     

@@ -9,6 +9,7 @@ import os
 import pytesseract
 from PIL import Image
 import random
+import loginJd
 from bs4 import BeautifulSoup
 from splinter import  Browser
 
@@ -56,6 +57,10 @@ def init():
     #创建card目录
     if os.path.exists(cardPath) != True: #目录不存在就创建
         os.makedirs(cardPath)
+    #登录
+    loginJd.processCookie()
+    passportRes = loginJd.Navigate(loginJd.loginPostUrl,loginJd.packagePostData())
+    print('login response: %s' % passportRes)
     global UUID
     #初始化UUID
     UUID=getNewUUID()
@@ -98,8 +103,6 @@ def get16RandomNum():
     return [random.randint(0,35) for _ in range(16)]
 if __name__=='__main__':
     init()
-    for i in range(10):
-        getNewVerifyCode(verifyCodeUrl)
-        
-#     getNewRandPwd()
+    getNewVerifyCode(verifyCodeUrl)
+    getNewRandPwd()
     

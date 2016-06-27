@@ -51,24 +51,31 @@ def packagePostData():
     #查找登陆参数中的uuid
     uuid = loginSoup.find_all("form")[0].find_all("input")[0]['value']
     print('uuid: %s' % uuid)
-     
-    #查找登陆参数中的随机值，class为clr
-#     clr = loginSoup.find_all("span","clr")[0]
-#     clrName = clr.find_next_siblings("input")[0]['name']  
-#     clrValue = clr.find_next_siblings("input")[0]['value']
-    clrName = 'aaa'  
-    clrValue = 'bbb'
-    #print clrName,clrValue
-     
+    #获取form表单里的隐藏域信息
+    name4 = loginSoup.find_all("form")[0].find_all("input")[4]['name']  
+    value4 = loginSoup.find_all("form")[0].find_all("input")[4]['value']
+    print(name4,value4)
+    name5 = loginSoup.find_all("form")[0].find_all("input")[5]['name']  
+    value5 = loginSoup.find_all("form")[0].find_all("input")[5]['value']
+    print(name5,value5)
+    name6 = loginSoup.find_all("form")[0].find_all("input")[6]['name']  
+    value6 = loginSoup.find_all("form")[0].find_all("input")[6]['value']
+    print(name6,value6) 
+    name7 = loginSoup.find_all("form")[0].find_all("input")[7]['name']  
+    value7 = loginSoup.find_all("form")[0].find_all("input")[7]['value']
+    print(name7,value7) 
     #print url
     postData = {
-      'loginname':base64.b64decode(userName).decode('utf-8'),
-      'nloginpwd':base64.b64decode(password).decode('utf-8'),
-      'loginpwd':base64.b64decode(password).decode('utf-8'),
+      'loginname':userName,
+      'nloginpwd':password,
+      'loginpwd':password,
       'machineNet':'',
       'machineCpu':'',
       'machineDisk':'', 
-       str(clrName):str(clrValue),
+       str(name4):str(value4),
+       str(name5):str(value5),
+       str(name6):str(value6),
+       str(name7):str(value7),
       'uuid':uuid,
       'authcode':''
     }

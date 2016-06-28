@@ -8,6 +8,7 @@ import base64
 RETRY_COUNT=5
 loginPageUrl = "https://passport.jd.com/new/login.aspx"
 loginPostUrl = "http://passport.jd.com/uc/loginService"
+UUID=''
 userName=''
 password=''
 #定义连接函数，有超时重连功能
@@ -18,7 +19,6 @@ def Navigate(url,data={}):
             print("尝试%s次之后仍无法链接网络，程序终止" % RETRY_COUNT)
             break
         try:
-            print('data type: %s' % type(data))
             if (data=={}):
                 req = urllib.request.Request(url)
             else:
@@ -51,6 +51,8 @@ def packagePostData():
     #查找登陆参数中的uuid
     uuid = loginSoup.find_all("form")[0].find_all("input")[0]['value']
     print('uuid: %s' % uuid)
+    global UUID
+    UUID=uuid
     #获取form表单里的隐藏域信息
     name4 = loginSoup.find_all("form")[0].find_all("input")[4]['name']  
     value4 = loginSoup.find_all("form")[0].find_all("input")[4]['value']

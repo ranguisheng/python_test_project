@@ -25,30 +25,7 @@ UUID=''
 #本地验证码临时存放目录
 imgPath='E:/private/image/'
 cardPath='E:/private/card/'
-#获取新的uuid
-def getNewUUID():
-    try:
-#         browser = Browser()
-#         browser.visit(uuidUrl)
-#         imgTag = browser.find_by_id('verifyImg')
-#         print('imgTag：%s' % imgTag)
-        req = urllib.request.Request(uuidUrl)
-        response = urllib.request.urlopen(req)
-        source_code = response.read()
-        print(source_code)
-        soup = BeautifulSoup(source_code,"html.parser")
-        uuid = soup.find('img', {'id':'verifyImg'}) #<span id="number">0</span>
-        if uuid == None:
-            print("鬼知道什么原因，居然没有uuid!")
-        else:
-            print("获取到的uuid为：%s" % uuid)
-            return uuid
-    except Exception as e:
-        print("Error",e)
-        logging.exception(e)
-        traceback.print_exc()
-#     finally:
-#         browser.quit()
+
 #做初始化操作
 def init():
     #创建验证码目录
@@ -63,7 +40,26 @@ def init():
     print('login response: %s' % passportRes)
     global UUID
     #初始化UUID
-    UUID=getNewUUID()
+#     UUID=getNewUUID()
+    UUID=loginJd.UUID
+    print('UUID is : %s' % UUID)
+#获取新的uuid
+def getNewUUID():
+    try:
+        source_code = loginJd.Navigate(uuidUrl)
+        print('get new uuid:')
+        print(source_code)
+        soup = BeautifulSoup(source_code,"html.parser")
+        uuid = soup.find('img', {'id':'verifyImg'}) #<span id="number">0</span>
+        if uuid == None:
+            print("鬼知道什么原因，居然没有uuid!")
+        else:
+            print("获取到的uuid为：%s" % uuid)
+            return uuid
+    except Exception as e:
+        print("Error",e)
+        logging.exception(e)
+        traceback.print_exc()
 #保存验证码图片&&获取文本的验证码
 def getNewVerifyCode(verifyCodeUrl):
     #下载验证码图片

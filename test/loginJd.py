@@ -3,7 +3,9 @@ import http.cookiejar
 import socket
 from bs4 import BeautifulSoup
 import traceback
-import base64
+# from datetime import datetime
+from PIL import Image
+import downloadVerifyCodePic
 
 RETRY_COUNT=5
 loginPageUrl = "https://passport.jd.com/new/login.aspx"
@@ -11,6 +13,7 @@ loginPostUrl = "http://passport.jd.com/uc/loginService"
 UUID=''
 userName=''
 password=''
+imgPath='E:/private/image/'
 #定义连接函数，有超时重连功能
 def Navigate(url,data={}):           
     tryTimes = 0
@@ -81,7 +84,17 @@ def packagePostData():
       'uuid':uuid,
       'authcode':''
     }
-    print('postData')
+    #下载验证码
+    checkPicUrl = 'http:'+loginSoup.find_all("img","verify-code")[0]['src2']
+    codeLocalPath = downloadVerifyCodePic.downCode(checkPicUrl)
+    image = Image.open(codeLocalPath)
+    #打开图片
+    image.show()
+    checkCode = input("请输入弹出图片中的验证码：") 
+    #关闭图片
+    image.close()
+    postData['authcode'] = str(checkCode)
+    print('login postData:')
     print(postData)
     return postData
 if __name__=='__main__':

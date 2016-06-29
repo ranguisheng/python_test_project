@@ -96,7 +96,7 @@ class BloomFilter(object):
         return hash_val
 if __name__ == '__main__':
     #测试代码
-    bf = BloomFilter(0.001, 1000000)
+    bf = BloomFilter(0.001, 100000000)
     element = 'palydawn'
     bf.insert_element(element)
-    print(bf.is_element_exist('palydawn'))
+    print(bf.is_element_exist('palydawn1'))
